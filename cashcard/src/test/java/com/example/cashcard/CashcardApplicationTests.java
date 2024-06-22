@@ -18,13 +18,13 @@ class CashCardApplicationTests {
 
 	@Test
 	void shouldReturnACashCardWhenDataIsSaved() {
-		ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/99", String.class);
+		ResponseEntity<String> response = restTemplate.getForEntity("/cashcards/99", String.class);// 99 is the id of the cash card
 
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);// 200
 
-		DocumentContext documentContext = JsonPath.parse(response.getBody());
-		Number id = documentContext.read("$.id");
-		assertThat(id).isEqualTo(99);
+		DocumentContext documentContext = JsonPath.parse(response.getBody());// Parse the response body as JSON
+		Number id = documentContext.read("$.id");// Read the id field from the JSON response
+		assertThat(id).isEqualTo(99);// Check that the id field is equal to 99
 
 		Double amount = documentContext.read("$.amount");
 		assertThat(amount).isEqualTo(123.45);
